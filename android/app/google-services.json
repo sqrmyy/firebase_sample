@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "974718791839",
+    "project_id": "my-easy-tutorial-e7247",
+    "storage_bucket": "my-easy-tutorial-e7247.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974718791839:android:9361388c4f04f9ad76f2aa",
+        "android_client_info": {
+          "package_name": "com.example.firebase_sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974718791839-tve0ne5s8p8np8g38rcsrr3kt7ggebdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC3w7WDFKd-5kEAS_EHjr8Z3tyLe5wU-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974718791839-tve0ne5s8p8np8g38rcsrr3kt7ggebdh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
