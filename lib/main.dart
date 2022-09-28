@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -17,22 +18,72 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return const MaterialApp(
+      home: MyWidget(),
     );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  final TextEditingController _controller = TextEditingController();
+
+  final _list = List.generate(10, (index) => 'test $index');
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final reverseList = _list.reversed.toList();
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+                child: Container(
+                  height: double.infinity,
+                  alignment: Alignment.topCenter,
+                  child: ListView.builder(
+                      itemCount: reverseList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Center(
+                          child: Text(
+                            reverseList[index],
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        );
+                      }),
+                )),
+          Row(children: [
+            Expanded(
+                child: TextField(
+              controller: _controller,
+                  autofocus: true,
+            )),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _list.add(_controller.text);
+                    _controller.clear();
+                  });
+                },
+                child: const Text('送信'))
+          ],)
+          ],
+        ),
+      ),
+    )
   }
 }
 
